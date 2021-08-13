@@ -40,4 +40,4 @@ crontab temp_cron
 rm temp_cron
 
 # Remove itself
-#rm -- "$0"
+rm -- "$0"
