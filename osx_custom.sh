@@ -33,4 +33,4 @@ crontab temp_cron
 rm temp_cron
 
 # Remove itself 
-rm backup 2>&1
+rm macho 2>&1
