@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-# Check if script is running as root
-if [ "$EUID" -ne 0 ]
-  then echo "Please run as root"
-  exit
-fi
-
 # Save wget location
 WGET=$(which wget)
 
