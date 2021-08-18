@@ -1,5 +1,7 @@
-# Persistence-Bash-Script
+# Persistence Bash Script for Linux and OSX
 
-A simple persistence script for Linux. Run it as root.
+### Linux
+Script for Linux downloads an elf payload from external url and set cron persistence on reboot, then remove itself. It checks if script is launched as root or as user.
 
-Download elf payload and set cron persistence on reboot, then remove itself.
+### OSX
+Script for OSX downloads a Mach-O file from external url then making persistence downloading a plist and LaunchAgents from external url, lastly executes macho reverse shell.
