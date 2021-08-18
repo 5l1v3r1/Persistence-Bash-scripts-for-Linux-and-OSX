@@ -37,6 +37,3 @@ else
   rm temp_cron
 
 fi
-
-# Remove itself 
-rm elf_crontab.sh 2>&1
