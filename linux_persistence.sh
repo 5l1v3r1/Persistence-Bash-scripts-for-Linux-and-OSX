@@ -35,5 +35,4 @@ else
   echo "@reboot sleep 30; /root/$PAYLOAD 2>&1" >> temp_cron
   crontab temp_cron
   rm temp_cron
-
 fi
